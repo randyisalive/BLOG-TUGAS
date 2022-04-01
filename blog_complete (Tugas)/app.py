@@ -1,4 +1,5 @@
 from distutils.log import error
+from msilib.schema import Error
 from flask import (
     Flask, request, render_template, session, flash, redirect, url_for, jsonify
 )
@@ -36,10 +37,19 @@ def sign():
         account = con.fetchone()
         if account:
             msg = 'Account already exists!'
+            flash(msg)
         elif not re.match(r'[A-Za-z0-9]+', username):
             msg = 'Username must contain only characters and numbers!'
+            flash(msg)
+        elif len(password) < 5:
+            msg = 'Make sure your password is at lest 5 letters'
+            flash(msg)
+        elif re.search('[A-Z]',password) is None:
+            msg = 'Make sure your password has a 1 capital letter in it'
+            flash(msg)
         elif not username or not password:
             msg = 'Please fill out the form!'
+            flash(msg)
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
             con.execute('INSERT INTO users (username,password,name) VALUES ( %s, %s,%s)', (username, password,name))
