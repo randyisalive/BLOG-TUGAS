@@ -17,9 +17,13 @@
                 <span>
                     Hello, {{ session['username'] }}
                 </span>
-                <a href="{{ url_for('logout') }}">Log Out</a> {% else %}
-                <a href="{{ url_for('sign')}}">Create Account</a>
-                <a href="{{ url_for('login') }}">Log In</a> {% endif %}
+                <li>
+                    <ul>
+                        <a class="btn btn-primary" href="{{ url_for('logout') }}">Log Out</a> {% else %}
+                        <a class="btn btn-primary" href="{{ url_for('sign')}}">Create Account</a>
+                        <a class="btn btn-outline-secondary" href="{{ url_for('login') }}">Log In</a> {% endif %}
+                    </ul>    
+                </li>
             </form>
         </div>
     </nav>
