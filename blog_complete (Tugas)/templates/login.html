@@ -21,5 +21,5 @@
         </div>
     </div>
 </form><br>{% for message in get_flashed_messages() %}
-<div>{{ message }}</div>
+<div class="alert alert-danger">{{ message }}</div>
 {% endfor %} {% endblock %}
